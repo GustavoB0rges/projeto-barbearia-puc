@@ -1,0 +1,13 @@
+.header {
+    color: white;
+    padding: 0px;
+    background: #f1f5f9;
+    margin: 0;
+    &__box {
+      min-height: 120px;
+      background: #2970E4;
+      margin: 0 -1rem;
+      padding: 25px;
+      font-size: 36px;
+    }
+}

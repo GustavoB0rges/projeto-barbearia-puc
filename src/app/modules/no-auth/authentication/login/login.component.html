@@ -1,0 +1,53 @@
+<div class="main background" fxFlex fxLayout="row" fxLayoutAlign="end center">
+    <div class="img py-4">
+        <img src="./assets/img/logo.png" style="width: 100%" alt="Company Logo" />
+    </div>
+    <mat-card fxFlex class="card-main" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
+        <div class="cad-content">
+            <div style="margin-bottom: 50px;">
+                <h2>Seja bem-vindo</h2>
+                <p style="color: #9BB58B;"><span style="color: gray;">Não possui conta? </span>Cadastre-se</p>
+            </div>
+
+            <div class="form-login">
+                <form [formGroup]="form" fxFlex fxLayout="column">
+
+                    <div class="example-container">
+                        <mat-form-field  appearance="outline" style="width: 100%;">
+                            <mat-label>E-mail</mat-label>
+                            <input matInput placeholder="pat@example.com" [formControlName]="'email'" required>
+
+                        </mat-form-field>
+
+                        <mat-error>
+                            <app-errors [formcontrolname]="'email'" [formGroup]="form"></app-errors>
+                        </mat-error>
+                    </div>
+
+                    <div class="example-container">
+                        <mat-form-field appearance="outline">
+                            <mat-label>Password</mat-label>
+                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="password"
+                                [formControlName]="'password'" required>
+                            <mat-icon type="button" mat-icon-button matSuffix class="icon" (click)="hide = !hide">{{hide ? 'visibility_off' :
+                                'visibility'}}</mat-icon>
+                        </mat-form-field>
+
+                        <mat-error>
+                            <app-errors [formcontrolname]="'password'" [formGroup]="form"></app-errors>
+                        </mat-error>
+
+
+                    </div>
+                    <div>
+                        <p style="color: #8DAB7B; margin-bottom: 10px;" fxLayoutAlign="end end" class="example-margin">Esqueceu a senha?</p>
+                    </div>
+
+                    <button mat-raised-button [disabled]="form.invalid" class="btn" (click)="navigate()">
+                        Entrar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </mat-card>
+</div>

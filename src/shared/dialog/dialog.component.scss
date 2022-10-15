@@ -1,0 +1,37 @@
+.apple {
+    border: 1px solid;
+    border-radius: 10px;
+    background-color: black;
+    color: white;
+    width: 15vw;
+}
+
+.imgApple {
+    max-width: 25px;
+    max-height:100px;
+    width: auto;
+    height: auto;
+}
+
+.content {
+    align-items: center;
+    border-radius: 18px;
+    border: 0px;
+    box-sizing: border-box;
+    color: rgb(255, 255, 255);
+    display: inline-flex;
+    font-family: Nunito, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    min-height: 36px;
+    line-height: 16px;
+    padding: 8px 16px;
+    position: relative;
+    -webkit-box-pack: center;
+    justify-content: center;
+    text-decoration: none;
+    cursor: pointer;
+    background: rgb(var(--PRIMARY));
+    margin-left: -8px;
+    width: calc(100% + 16px);
+}
