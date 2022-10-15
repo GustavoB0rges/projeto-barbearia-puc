@@ -5,18 +5,19 @@
     <div class="page__content shadow p-3 position-relative">
         <form fxFlex="100" [formGroup]="form" fxLayout="column">
             <div style="margin: 10px;" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10">
-                <div class="btn-save">
-                    <mat-icon [disabled]="form?.invalid" (click)="saveCliente()">save</mat-icon>
-                </div>
-                <div class="btn-edit" *ngIf="operation === 'edit'">
-                    <mat-icon [disabled]="form?.invalid" (click)="saveCliente()">edit</mat-icon>
-                </div>
-                <div class="btn-delete" *ngIf="operation === 'edit' || 'view'">
-                    <mat-icon [disabled]="form?.invalid" (click)="saveCliente()">delete</mat-icon>
-                </div>
-                <div class="btn-save" *ngIf="operation === 'edit' || 'new'">
-                    <mat-icon mat-raised-button (click)="cancel()">cancel</mat-icon>
-                </div>
+                <button mat-icon-button (click)="saveCliente()" [disabled]="form.invalid" class="btn-save" *ngIf="operation === 'new' || operation === 'edit'">
+                    <mat-icon>save</mat-icon>
+                </button>
+                <button mat-icon-button (click)="onEdit()" [disabled]="form.invalid" class="btn-save" *ngIf="showEdit && operation === 'view' ">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deletaClientes()" class="btn-delete" *ngIf="operation === 'edit' || operation === 'view'">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                <button mat-icon-button (click)="cancel()" class="btn-cancel">
+                    <mat-icon>cancel</mat-icon>
+                </button>
+
             </div>
 
             <div style="margin-top: 50px;">

@@ -43,7 +43,6 @@ export class ClienteIndexComponent implements OnInit {
   }
 
   applyFilter(filterValue: string) {
-    console.log(filterValue);
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
     this.cliente.filter = filterValue;
@@ -55,17 +54,18 @@ export class ClienteIndexComponent implements OnInit {
 
   editar(value): void {
     this.operation = 'edit';
-    this.router.navigate([`/auth/clientes/${value.id}/${this.operation}`])
+    this.router.navigate([`/auth/clientes/${value.id}/${this.operation}`], { queryParams: { operation: this.operation }})
   }
 
   navigateToClienteCreate(): void {
-    this.router.navigate(['/auth/clientes/new'])
+    this.operation = 'new';
+    this.router.navigate([`/auth/clientes/${this.operation}`], { queryParams: { operation: this.operation }})
   }
 
   deletaClientes(row: any): void {
     const id = row.id;
     this.clienteService.delete(id).subscribe(() => {
-      this.clienteService.showMessage("Produto excluido com sucesso!");
+      this.clienteService.showMessage("Cliente excluido com sucesso!");
       this.ngOnInit();
     });
   }

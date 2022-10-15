@@ -17,6 +17,7 @@ export class ClienteFormComponent implements OnInit {
   operation: 'view' | 'new' | 'edit' = 'new';
   destroy$ = new Subject();
   hide = true;
+  showEdit: boolean =  true;
 
   constructor(private clienteService: ClienteService,
     private router: Router,
@@ -28,44 +29,43 @@ export class ClienteFormComponent implements OnInit {
       id_endereco: new FormControl(null),
       nome: new FormControl(null, [Validators.required, Validators.maxLength(120)]),
       cpf: new FormControl(null),
-      dt_nasc: new FormControl(null),
+      dt_nasc: new FormControl(null, [Validators.required]),
       senha: new FormControl(null, [Validators.required, Validators.minLength(4),]),
       email: new FormControl(null, [
         Validators.required,
         Validators.email,
         Validators.pattern('^[a-z0-9.%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
       ]),
-      telefone: new FormControl(null),
+      telefone: new FormControl(null, [Validators.required]),
       celular: new FormControl(null),
       cep: new FormControl(null, [Validators.pattern('^[0-9]*$')]),
       estado: new FormControl(null),
       cidade: new FormControl(null),
       bairro: new FormControl(null),
       rua: new FormControl(null),
-      numero: new FormControl(null, [Validators.required, Validators.maxLength(4),]),
+      numero: new FormControl(null, [Validators.maxLength(4),]),
       complemento: new FormControl(null),
     });
   }
 
   ngOnInit(): void {
-
-
     this.activatedRoute.queryParams
     .subscribe(params => {
       this.operation = params['operation'];
     }
-  );
-
+    );
+    
     const id: any = this.activatedRoute.snapshot.paramMap.get('id');
     const operation: any = this.activatedRoute.snapshot;
-    console.log('operation param',operation);
     
     if (id) {
       this.clienteService.readByid(id).subscribe(response => {
+        const horasAjustadas = moment(response.pessoa.dataNasc).add(1,'days').format('YYYY-MM-DD')
+        
         this.form.get('id').setValue(response?.id)
         this.form.get('id_pessoa').setValue(response?.pessoa.id)
         this.form.get('nome').setValue(response.pessoa.nome)
-        this.form.get('dt_nasc').setValue(new Date(response.pessoa.dataNasc))
+        this.form.get('dt_nasc').setValue(horasAjustadas)
         this.form.get('cpf').setValue(response.pessoa.cpf)
         this.form.get('email').setValue(response.pessoa.email)
         this.form.get('telefone').setValue(response.pessoa.telefone)
@@ -89,7 +89,6 @@ export class ClienteFormComponent implements OnInit {
       }
     } else {
       this.title = 'Adicionando';
-      this.operation = 'new';
     }
     this.form.get('id').disable();
   }
@@ -107,7 +106,7 @@ export class ClienteFormComponent implements OnInit {
       pessoa: {
         nome: this.form.get('nome').value,
         cpf: this.form.get('cpf').value,
-        dataNasc: moment(this.form.get('dt_nasc').value).utc().format('DD-MM-YYYY'),
+        dataNasc: this.form.get('dt_nasc').value,
         email: this.form.get('email').value,
         telefone: this.form.get('telefone').value,
         celular: this.form.get('celular').value,
@@ -138,12 +137,18 @@ export class ClienteFormComponent implements OnInit {
         error: (error) => {
           Swal.fire(
             "Erro!!",
-            error.error.message,
+            error.error.error,
             "error"
           );
         }
       }
     );
+  }
+
+  onEdit(): void {
+    this.showEdit = false;
+    this.form.enable();
+    this.operation = 'edit';
   }
 
   updateCliente(): void {
@@ -152,7 +157,7 @@ export class ClienteFormComponent implements OnInit {
       pessoa: {
         nome: this.form.get('nome').value,
         cpf: this.form.get('cpf').value,
-        dataNasc: moment(this.form.get('dt_nasc').value).utc().format('DD-MM-YYYY'),
+        dataNasc: this.form.get('dt_nasc').value,
         email: this.form.get('email').value,
         telefone: this.form.get('telefone').value,
         celular: this.form.get('celular').value,
@@ -172,10 +177,31 @@ export class ClienteFormComponent implements OnInit {
       }
     }
 
-    this.clienteService.update(payload, this.form.get('id').value).subscribe(() => {
-      this.clienteService.showMessage('Produto atualizado!');
+    this.clienteService.update(payload, this.form.get('id').value).subscribe(
+      {
+        next: (data) => {
+          if (data) {
+            Swal.fire('Sucesso!', 'Cliente atualizado!', 'success');
+            this.router.navigate(['/auth/clientes/index']);
+          }
+        },
+        error: (error) => {
+          Swal.fire(
+            "Erro!!",
+            error.error.error,
+            "error"
+          );
+        }
+      }
+    )
+  }
+
+  deletaClientes(): void {
+    const id: any = this.activatedRoute.snapshot.paramMap.get('id');
+    this.clienteService.delete(id).subscribe(() => {
+      this.clienteService.showMessage("Cliente excluido com sucesso!");
       this.router.navigate(['/auth/clientes/index']);
-    })
+    });
   }
 
   cancel(): void {
