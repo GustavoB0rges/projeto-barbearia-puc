@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit {
         Validators.pattern('^[a-z0-9.%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
       ]),
 
-      password: new FormControl(null, [
+      senha: new FormControl(null, [
         Validators.required,
         Validators.minLength(4),
       ])
