@@ -6,7 +6,7 @@
         <div fxLayout="row" fxLayoutAlign="end end">
             <div fxFlexAlign="center">
                 <button style="width: 235px;" mat-stroked-button>
-                    <input #inputstring class="input_search" (keyup)="applyFilter(inputstring.value)" placeholder="Pesquisar">
+                    <input #inputstring class="input_search" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Pesquisar">
                     <mat-icon style="border: 1px solid #D7D7D7; padding: 10px; border-radius: 5px;">search</mat-icon>
                 </button> 
             </div>
