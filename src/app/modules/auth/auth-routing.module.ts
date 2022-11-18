@@ -10,6 +10,10 @@ const routes: Routes = [
         loadChildren: () => import('./clientes/cliente.module').then(m => m.ClienteModule)
       },
       {
+        path: 'agendamentos',
+        loadChildren: () => import('./agendamento/agendamento.module').then(m => m.AgendamentoModule)
+      },
+      {
         path: '**',
         redirectTo: ''
       },

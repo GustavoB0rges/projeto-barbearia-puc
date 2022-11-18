@@ -13,8 +13,6 @@ import { ClienteFormComponent } from './cliente-form/cliente-form.component';
 import { ClienteIndexComponent } from './cliente-index/cliente-index.component';
 
 
-
-
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'index' },
   { path: 'index', component: ClienteIndexComponent },
