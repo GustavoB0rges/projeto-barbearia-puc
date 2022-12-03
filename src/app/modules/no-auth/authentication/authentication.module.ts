@@ -7,16 +7,19 @@ import { Routes, RouterModule } from '@angular/router';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from 'src/shared/shared.module';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
 ];
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     HttpClientModule,

@@ -43,6 +43,6 @@ const routes: Routes = [
   ], 
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class ClienteModule { 
+export class AdministradorModule { 
   
 }

@@ -14,6 +14,18 @@ const routes: Routes = [
         loadChildren: () => import('./agendamento/agendamento.module').then(m => m.AgendamentoModule)
       },
       {
+        path: 'funcionarios',
+        loadChildren: () => import('./funcionarios/funcionarios.module').then(m => m.FuncionarioModule)
+      },
+      {
+        path: 'administradores',
+        loadChildren: () => import('./administradores/administrador.module').then(m => m.AdministradorModule)
+      },
+      {
+        path: 'servicos',
+        loadChildren: () => import('./servicos/servicos.module').then(m => m.ServicosModule)
+      },
+      {
         path: '**',
         redirectTo: ''
       },

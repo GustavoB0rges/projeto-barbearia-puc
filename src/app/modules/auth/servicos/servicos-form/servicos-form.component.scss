@@ -1,0 +1,38 @@
+.page {
+    &__content {
+      min-height: calc(100vh - 100px);
+      border-radius: 10px;
+      margin-top: -3rem;
+      margin-left: 10px;
+      margin-right: 10px;
+      background: white;
+      color: black;
+      &-data {
+        top: 30%;
+        left: 30%;
+        transform: translate(-40%, -40%);
+      }
+    }
+}
+.btn-save {
+    color: #1E293B;
+    cursor: pointer;
+}
+.btn-delete {
+    color: #1E293B;
+    cursor: pointer;
+}
+.btn-edit {
+    color: #1E293B;
+    cursor: pointer;
+}
+.btn-cancel {
+    color: #1E293B;
+    cursor: pointer;
+}
+.form-content {
+    margin-top: 30px;
+}
+.icon {
+    cursor: pointer;
+}

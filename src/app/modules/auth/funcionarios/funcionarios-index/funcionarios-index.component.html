@@ -1,0 +1,86 @@
+<app-header 
+[title]="'Funcionários'">
+</app-header>
+<div class="page__content shadow p-3 position-relative">
+    <div fxflex>
+        <div fxLayout="row" fxLayoutAlign="end end">
+            <div fxFlexAlign="center">
+                <button style="width: 235px;" mat-stroked-button>
+                    <input #inputstring class="input_search" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Pesquisar">
+                    <mat-icon style="border: 1px solid #D7D7D7; padding: 10px; border-radius: 5px;">search</mat-icon>
+                </button> 
+            </div>
+
+            <button class="add" mat-raised-button (click)="navigateToFuncionarioCreate()">
+                <mat-icon>add_circle_outline</mat-icon>
+                <span class="text_add">
+                    Adicionar novo funcionário
+                </span> 
+            </button>
+        </div>
+        <div class="page__content shadow p-3 position-relative">
+            <div fxflex>
+                <div fxLayout="column" class="main">
+                    <div class="mat-elevation-z4">
+                        <table mat-table [dataSource]="funcionario | filter:searchText">
+                            <!-- Id Column -->
+                            <ng-container matColumnDef="id" >
+                                <th mat-header-cell *matHeaderCellDef>Id</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{row.id}}</td>
+                            </ng-container>
+                    
+                            <!-- Name Column -->
+                            <ng-container matColumnDef="nome">
+                                <th mat-header-cell *matHeaderCellDef>Nome</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{row.pessoa.nome}}</td>
+                            </ng-container>
+                    
+                            <!-- email Column -->
+                            <ng-container matColumnDef="email">
+                                <th mat-header-cell *matHeaderCellDef>email</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{ row.pessoa.email  }}</td>
+                            </ng-container>
+
+                            <!-- telefone Column -->
+                            <ng-container matColumnDef="telefone">
+                                <th mat-header-cell *matHeaderCellDef>Telefone</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{ row.pessoa.telefone  }}</td>
+                            </ng-container>
+
+                            <!-- data nascimento Column -->
+                            <ng-container matColumnDef="dataNasc">
+                                <th mat-header-cell *matHeaderCellDef>Data nascimento</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{ row.pessoa.dataNasc | date: 'dd/MM/yyy'  }}</td>
+                            </ng-container>
+                    
+                            <!-- actions Column -->
+                            <ng-container matColumnDef="actions">
+                                <th mat-header-cell *matHeaderCellDef>Ações</th>
+                                <td mat-cell *matCellDef="let row">
+                                    <mat-icon class="material-icons edit" (click)="editar(row)" style="cursor: pointer;">
+                                        edit
+                                    </mat-icon>
+
+                                    <mat-icon class="material-icons delete" (click)="deletaFuncionarios(row)"  style="cursor: pointer;">
+                                        delete
+                                    </mat-icon>
+                                </td>
+                            </ng-container>
+                    
+                            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                        </table>
+                        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+                    </div>
+                    
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    
+

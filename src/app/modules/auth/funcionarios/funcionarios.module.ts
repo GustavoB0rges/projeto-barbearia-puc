@@ -10,23 +10,23 @@ import { MaterialModule } from 'src/shared/material/material.module';
 import { FilterModule } from 'src/shared/pipe/filter.module';
 import { FilterPipe } from 'src/shared/pipe/filter.pipe';
 import { SharedModule } from 'src/shared/shared.module';
-import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-import { ClienteIndexComponent } from './cliente-index/cliente-index.component';
+import { FuncionarioFormComponent } from './funcionarios-form/funcionarios-form.component';
+import { FuncionarioIndexComponent } from './funcionarios-index/funcionarios-index.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'index' },
-  { path: 'index', component: ClienteIndexComponent },
-  { path: 'new', component: ClienteFormComponent },
-  { path: ':id/edit', component: ClienteFormComponent },
-  { path: ':id/delete', component: ClienteFormComponent },
-  { path: ':id/view', component: ClienteFormComponent },
+  { path: 'index', component: FuncionarioIndexComponent },
+  { path: 'new', component: FuncionarioFormComponent },
+  { path: ':id/edit', component: FuncionarioFormComponent },
+  { path: ':id/delete', component: FuncionarioFormComponent },
+  { path: ':id/view', component: FuncionarioFormComponent },
 ];
 
 @NgModule({
   declarations: [
-    ClienteIndexComponent,
-    ClienteFormComponent,
+    FuncionarioIndexComponent,
+    FuncionarioFormComponent,
   ],
   imports: [
     CommonModule,
@@ -35,14 +35,14 @@ const routes: Routes = [
     HttpClientModule,
     ReactiveFormsModule,
     FormsModule,
-    FilterModule,
     FlexLayoutModule,
     LayoutModule,
+    FilterModule,
     NgxMaskModule.forRoot(),
     RouterModule.forChild(routes)
   ], 
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
-export class ClienteModule { 
+export class FuncionarioModule { 
   
 }
