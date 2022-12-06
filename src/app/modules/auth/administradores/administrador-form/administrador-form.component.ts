@@ -1,4 +1,4 @@
-import { ClienteService } from '../cliente.service';
+import { AdministradorService } from '../administrador.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -6,11 +6,11 @@ import Swal from 'sweetalert2';
 import { Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment';
 @Component({
-  selector: 'app-cliente-form',
-  templateUrl: './cliente-form.component.html',
-  styleUrls: ['./cliente-form.component.scss']
+  selector: 'app-administrador-form',
+  templateUrl: './administrador-form.component.html',
+  styleUrls: ['./administrador-form.component.scss']
 })
-export class ClienteFormComponent implements OnInit {
+export class AdministradorFormComponent implements OnInit {
 
   title: any = null;
   form: FormGroup;
@@ -19,7 +19,7 @@ export class ClienteFormComponent implements OnInit {
   hide = true;
   showEdit: boolean =  true;
 
-  constructor(private clienteService: ClienteService,
+  constructor(private administradorService: AdministradorService,
     private router: Router,
     private activatedRoute: ActivatedRoute,) {
 
@@ -59,7 +59,7 @@ export class ClienteFormComponent implements OnInit {
     const operation: any = this.activatedRoute.snapshot;
     
     if (id) {
-      this.clienteService.readByid(id).subscribe(response => {
+      this.administradorService.readByid(id).subscribe(response => {
         const horasAjustadas = moment(response.pessoa.dataNasc).add(1,'days').format('YYYY-MM-DD')
         
         this.form.get('id').setValue(response?.id)
@@ -93,15 +93,15 @@ export class ClienteFormComponent implements OnInit {
     this.form.get('id').disable();
   }
 
-  saveCliente(): void {
+  saveAdministrador(): void {
     if (this.operation === 'new') {
-      this.createCliente();
+      this.createAdministrador();
     } else {
-      this.updateCliente();
+      this.updateAdministrador();
     }
   }
 
-  createCliente(): void {
+  createAdministrador(): void {
     const payload = {
       pessoa: {
         nome: this.form.get('nome').value,
@@ -112,7 +112,7 @@ export class ClienteFormComponent implements OnInit {
         celular: this.form.get('celular').value,
         senha: this.form.get('senha').value,
         tipoUsuario: {
-          id: 1
+          id: 2
         },
         endereco: {
           cep: this.form.get('cep').value,
@@ -126,12 +126,12 @@ export class ClienteFormComponent implements OnInit {
       }
     }
 
-    this.clienteService.create(payload).subscribe(
+    this.administradorService.create(payload).subscribe(
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Cliente cadastrado', 'success');
-            this.router.navigate(['/auth/clientes/index']);
+            Swal.fire('Sucesso!', 'Administrador cadastrado', 'success');
+            this.router.navigate(['/auth/administradores/index']);
           }
         },
         error: (error) => {
@@ -151,7 +151,7 @@ export class ClienteFormComponent implements OnInit {
     this.operation = 'edit';
   }
 
-  updateCliente(): void {
+  updateAdministrador(): void {
     const payload = {
       id: this.activatedRoute.snapshot.paramMap.get('id'),
       pessoa: {
@@ -177,12 +177,12 @@ export class ClienteFormComponent implements OnInit {
       }
     }
 
-    this.clienteService.update(payload, this.form.get('id').value).subscribe(
+    this.administradorService.update(payload, this.form.get('id').value).subscribe(
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Cliente atualizado!', 'success');
-            this.router.navigate(['/auth/clientes/index']);
+            Swal.fire('Sucesso!', 'Administrador atualizado!', 'success');
+            this.router.navigate(['/auth/administradores/index']);
           }
         },
         error: (error) => {
@@ -196,16 +196,16 @@ export class ClienteFormComponent implements OnInit {
     )
   }
 
-  deletaClientes(): void {
+  deletaAdministradors(): void {
     const id: any = this.activatedRoute.snapshot.paramMap.get('id');
-    this.clienteService.delete(id).subscribe(() => {
-      this.clienteService.showMessage("Cliente excluido com sucesso!");
-      this.router.navigate(['/auth/clientes/index']);
+    this.administradorService.delete(id).subscribe(() => {
+      this.administradorService.showMessage("Administrador excluido com sucesso!");
+      this.router.navigate(['/auth/administradores/index']);
     });
   }
 
   cancel(): void {
-    this.router.navigate(['/auth/clientes/index']);
+    this.router.navigate(['/auth/administradores/index']);
   }
 
   ngOnDestroy(): void {

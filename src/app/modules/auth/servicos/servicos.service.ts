@@ -23,7 +23,6 @@ export class ServicoService {
     })
   }
   
-
   create(servico:any): Observable<any>{
     return this.http.post<any>(`${ this.baseUrl }/servicos`, servico);
   }

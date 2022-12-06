@@ -3,22 +3,15 @@
 <div class="page__content shadow p-3 position-relative">
   <div class="page__content shadow p-3 position-relative">
       <div fxLayout="row" fxLayoutAlign="end end">
-        <!-- <button style="margin: 10px 0px 10px 0px;" class="add" mat-raised-button>
+        <button (click)="openDialog()" style="margin: 10px 0px 10px 0px;" class="add" mat-raised-button>
           <mat-icon>add_circle_outline</mat-icon>
           <span class="text_add">
-            Adicionar novo cliente
+            Criar agendamento
           </span>
-        </button> -->
-
-        <mat-form-field class="lt-md:hidden treo-mat-dense treo-mat-no-subscript view-changer">
-          <mat-select (selectionChange)="changeView(viewChanger.value)" [value]="view" #viewChanger="matSelect">
-            <mat-option [value]="'dayGridMonth'">Mês</mat-option>
-            <mat-option [value]="'dayGridDay'">Dia</mat-option>
-            <mat-option [value]="'dayGridWeek'">Semana</mat-option>
-          </mat-select>
-        </mat-form-field>
+        </button>
       </div>
 
-    <full-calendar *ngIf='calendarVisible' [options]='calendarOptions'></full-calendar>
+    <full-calendar *ngIf='calendarVisible'
+     [options]='calendarOptions'></full-calendar>
   </div>
 </div>

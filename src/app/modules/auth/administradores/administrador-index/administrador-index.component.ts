@@ -3,31 +3,31 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { Cliente } from '../cliente.model';
-import { ClienteService } from '../cliente.service';
+import { Administrador } from '../administrador.model';
+import { AdministradorService } from '../administrador.service';
 
 
 @Component({
   selector: 'app-funcionarios-index',
-  templateUrl: './cliente-index.component.html',
-  styleUrls: ['./cliente-index.component.scss']
+  templateUrl: './administrador-index.component.html',
+  styleUrls: ['./administrador-index.component.scss']
 })
-export class ClienteIndexComponent implements OnInit {
+export class AdministradorIndexComponent implements OnInit {
 
   @ViewChild('inputSearch', { static: false }) inputSearch: ElementRef;
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
   operation: string;
-  cliente = new MatTableDataSource<any>();
-  // dataSource = new MatTableDataSource<Cliente>(null);
+  administrador = new MatTableDataSource<any>();
+  // dataSource = new MatTableDataSource<Administrador>(null);
   displayedColumns = ['id', 'nome', 'email', 'telefone', 'dataNasc', 'actions'];
   name: string;
   searchText: string;
   inputOpen = false;
 
   constructor(
-    private clienteService: ClienteService, 
+    private administradorService: AdministradorService, 
     private router: Router,) { }
 
   sideBarOpen = true;
@@ -37,15 +37,15 @@ export class ClienteIndexComponent implements OnInit {
   }
   
   getClient(): void {
-    this.clienteService.read().subscribe(cliente => {
-      this.cliente = cliente;
+    this.administradorService.read().subscribe(administrador => {
+      this.administrador = administrador;
     });
   }
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
     filterValue = filterValue.toLowerCase(); // Datasource defaults to lowercase matches
-    this.cliente.filter = filterValue;
+    this.administrador.filter = filterValue;
   }
 
   sideBarToggler() {
@@ -54,18 +54,18 @@ export class ClienteIndexComponent implements OnInit {
 
   editar(value): void {
     this.operation = 'edit';
-    this.router.navigate([`/auth/clientes/${value.id}/${this.operation}`], { queryParams: { operation: this.operation }})
+    this.router.navigate([`/auth/administradores/${value.id}/${this.operation}`], { queryParams: { operation: this.operation }})
   }
 
-  navigateToClienteCreate(): void {
+  navigateToAdministradorCreate(): void {
     this.operation = 'new';
-    this.router.navigate([`/auth/clientes/${this.operation}`], { queryParams: { operation: this.operation }})
+    this.router.navigate([`/auth/administradores/${this.operation}`], { queryParams: { operation: this.operation }})
   }
 
-  deletaClientes(row: any): void {
+  deletaAdministradors(row: any): void {
     const id = row.id;
-    this.clienteService.delete(id).subscribe(() => {
-      this.clienteService.showMessage("Cliente excluido com sucesso!");
+    this.administradorService.delete(id).subscribe(() => {
+      this.administradorService.showMessage("Administrador excluido com sucesso!");
       this.ngOnInit();
     });
   }
@@ -73,7 +73,7 @@ export class ClienteIndexComponent implements OnInit {
 
   onClickRow(row: any) : void {
     this.operation = 'view';
-    this.router.navigate([`/auth/clientes/${row.id}/${this.operation}`],{ queryParams: { operation: this.operation }});
+    this.router.navigate([`/auth/administradores/${row.id}/${this.operation}`],{ queryParams: { operation: this.operation }});
   }
 
 

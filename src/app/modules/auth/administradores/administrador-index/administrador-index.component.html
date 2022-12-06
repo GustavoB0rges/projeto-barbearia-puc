@@ -11,10 +11,10 @@
                 </button> 
             </div>
 
-            <button class="add" mat-raised-button (click)="navigateToClienteCreate()">
+            <button class="add" mat-raised-button (click)="navigateToAdministradorCreate()">
                 <mat-icon>add_circle_outline</mat-icon>
                 <span class="text_add">
-                    Adicionar novo cliente
+                    Adicionar novo Administrador
                 </span> 
             </button>
         </div>
@@ -22,7 +22,7 @@
             <div fxflex>
                 <div fxLayout="column" class="main">
                     <div class="mat-elevation-z4">
-                        <table mat-table [dataSource]="cliente | filter:searchText">
+                        <table mat-table [dataSource]="administrador | filter:searchText">
                             <!-- Id Column -->
                             <ng-container matColumnDef="id" >
                                 <th mat-header-cell *matHeaderCellDef>Id</th>
@@ -61,7 +61,7 @@
                                         edit
                                     </mat-icon>
 
-                                    <mat-icon class="material-icons delete" (click)="deletaClientes(row)"  style="cursor: pointer;">
+                                    <mat-icon class="material-icons delete" (click)="deletaAdministradors(row)"  style="cursor: pointer;">
                                         delete
                                     </mat-icon>
                                 </td>

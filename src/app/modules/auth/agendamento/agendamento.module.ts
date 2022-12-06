@@ -9,6 +9,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { SharedModule } from 'src/shared/shared.module';
+import { DialogContentComponent } from './dialog-content/dialog-content.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'index' },
@@ -17,7 +18,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    AgendamentoComponent
+    AgendamentoComponent,
+    DialogContentComponent
   ],
   imports: [
     CommonModule,

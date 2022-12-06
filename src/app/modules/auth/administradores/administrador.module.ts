@@ -10,23 +10,23 @@ import { MaterialModule } from 'src/shared/material/material.module';
 import { FilterModule } from 'src/shared/pipe/filter.module';
 import { FilterPipe } from 'src/shared/pipe/filter.pipe';
 import { SharedModule } from 'src/shared/shared.module';
-import { ClienteFormComponent } from './cliente-form/cliente-form.component';
-import { ClienteIndexComponent } from './cliente-index/cliente-index.component';
+import { AdministradorFormComponent } from './administrador-form/administrador-form.component';
+import { AdministradorIndexComponent } from './administrador-index/administrador-index.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'index' },
-  { path: 'index', component: ClienteIndexComponent },
-  { path: 'new', component: ClienteFormComponent },
-  { path: ':id/edit', component: ClienteFormComponent },
-  { path: ':id/delete', component: ClienteFormComponent },
-  { path: ':id/view', component: ClienteFormComponent },
+  { path: 'index', component: AdministradorIndexComponent },
+  { path: 'new', component: AdministradorFormComponent },
+  { path: ':id/edit', component: AdministradorFormComponent },
+  { path: ':id/delete', component: AdministradorFormComponent },
+  { path: ':id/view', component: AdministradorFormComponent },
 ];
 
 @NgModule({
   declarations: [
-    ClienteIndexComponent,
-    ClienteFormComponent,
+    AdministradorIndexComponent,
+    AdministradorFormComponent,
   ],
   imports: [
     CommonModule,

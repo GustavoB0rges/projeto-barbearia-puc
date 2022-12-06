@@ -1,0 +1,34 @@
+<form fxFlex="100" [formGroup]="form" fxLayout="column">
+    <div style="margin: 10px;" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10">
+        <button mat-icon-button (click)="salvar()" [disabled]="form.invalid" class="btn-save">
+            <mat-icon>save</mat-icon>
+        </button>
+        <!-- <button mat-icon-button (click)="editar()" [disabled]="form.invalid" class="btn-save" *ngIf="showEdit && operation === 'view' ">
+            <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="deletar()" class="btn-delete" *ngIf="operation === 'edit' || operation === 'view'">
+            <mat-icon>delete</mat-icon>
+        </button>
+        <button mat-icon-button (click)="cancelar()" class="btn-cancel">
+            <mat-icon>cancel</mat-icon>
+        </button> -->
+
+    </div>
+
+    <div style="margin-top: 50px;">
+        <div fxLayout="row wrap" fxLayoutGap="15">
+            <mat-form-field fxFlex appearance="outline">
+                <mat-label>Nome</mat-label>
+                <input matInput placeholder="Digite aqui" type="text" formControlName="nome" [disabled]="true"
+                    name="nome">
+            </mat-form-field>
+
+            <mat-error>
+                <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
+            </mat-error>
+        </div>
+    </div>
+
+    
+
+</form>

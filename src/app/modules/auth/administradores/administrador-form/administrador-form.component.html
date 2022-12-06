@@ -5,13 +5,13 @@
     <div class="page__content shadow p-3 position-relative">
         <form fxFlex="100" [formGroup]="form" fxLayout="column">
             <div style="margin: 10px;" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10">
-                <button mat-icon-button (click)="saveCliente()" [disabled]="form.invalid" class="btn-save" *ngIf="operation === 'new' || operation === 'edit'">
+                <button mat-icon-button (click)="saveAdministrador()" [disabled]="form.invalid" class="btn-save" *ngIf="operation === 'new' || operation === 'edit'">
                     <mat-icon>save</mat-icon>
                 </button>
                 <button mat-icon-button (click)="onEdit()" [disabled]="form.invalid" class="btn-save" *ngIf="showEdit && operation === 'view' ">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button mat-icon-button (click)="deletaClientes()" class="btn-delete" *ngIf="operation === 'edit' || operation === 'view'">
+                <button mat-icon-button (click)="deletaAdministradors()" class="btn-delete" *ngIf="operation === 'edit' || operation === 'view'">
                     <mat-icon>delete</mat-icon>
                 </button>
                 <button mat-icon-button (click)="cancel()" class="btn-cancel">

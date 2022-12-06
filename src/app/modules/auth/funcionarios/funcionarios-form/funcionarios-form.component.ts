@@ -112,7 +112,7 @@ export class FuncionarioFormComponent implements OnInit {
         celular: this.form.get('celular').value,
         senha: this.form.get('senha').value,
         tipoUsuario: {
-          id: 2
+          id: 3
         },
         endereco: {
           cep: this.form.get('cep').value,
