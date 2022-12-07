@@ -16,8 +16,8 @@
   }
 
   .cad-content {
-    margin-top: 25% !important;
-    margin-bottom: 25% !important;
+    margin-top: 15% !important;
+    margin-bottom: 15% !important;
   }
 
   .form-login {
@@ -74,7 +74,29 @@
     margin: 0 10px;
   }
 
+  .btn-save {
+    background-color: #8DAB7B;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+  .btn-cancel {
+    background-color: #1E293B;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: #FFFFFF;
+    cursor: pointer;
+  }
+
   ::ng-deep .mat-form-field-infix {
     width: 250px !important;
+  }
+  .mat-icon-button.mat-button-disabled.mat-button-disabled {
+    color: white;
   }
   

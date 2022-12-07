@@ -8,6 +8,7 @@ import { MaterialModule } from 'src/shared/material/material.module';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from 'src/shared/shared.module';
 import { RegisterComponent } from './register/register.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 
 const routes: Routes = [
@@ -29,6 +30,7 @@ const routes: Routes = [
     FlexLayoutModule,
     CommonModule,
     MaterialModule,
+    NgxMaskModule.forRoot(),
     RouterModule.forChild(routes)
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

@@ -1,55 +1,75 @@
-<!-- <div class="main background" fxFlex fxLayout="row" fxLayoutAlign="end center">
+<div class="main background" fxFlex fxLayout="row" fxLayoutAlign="end center">
     <div class="img py-4">
         <img src="./assets/img/logo.png" style="width: 100%" alt="Company Logo" />
     </div>
-    <mat-card fxFlex class="card-main" fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center">
-        <div class="cad-content">
-            <div style="margin-bottom: 50px;">
-                <h2>Seja bem-vindo</h2>
-                <p style="color: #9BB58B;"><span style="color: gray;">Não possui conta? </span>Cadastre-se</p>
-            </div>
-
-            <div class="form-login">
-                <form [formGroup]="form" fxFlex fxLayout="column">
-
-                    <div class="example-container">
-                        <mat-form-field  appearance="outline" style="width: 100%;">
-                            <mat-label>E-mail</mat-label>
-                            <input matInput placeholder="pat@example.com" [formControlName]="'email'" required>
-
+    <mat-card fxFlex class="card-main" fxLayout="row" fxLayoutAlign="center">
+        <div fxFlex="80" class="cad-content">
+            <form fxFlex="100" [formGroup]="form" fxLayout="column">
+                <h1>Cadastrar conta</h1>
+                <div style="margin-top: 50px;">
+                    <div fxLayout="column" fxLayoutGap="15">
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Nome</mat-label>
+                            <input matInput placeholder="Digite aqui" type="text" formControlName="nome" [disabled]="true"
+                                name="nome">
                         </mat-form-field>
+        
+                        <mat-error>
+                            <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
+                        </mat-error>
 
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Email</mat-label>
+                            <input matInput placeholder="Digite aqui" type="text" formControlName="email" [disabled]="true"
+                                name="email">
+                        </mat-form-field>
+        
                         <mat-error>
                             <app-errors [formcontrolname]="'email'" [formGroup]="form"></app-errors>
                         </mat-error>
-                    </div>
-
-                    <div class="example-container">
+                        
                         <mat-form-field appearance="outline">
                             <mat-label>Senha</mat-label>
-                            <input matInput [type]="hide ? 'password' : 'text'" placeholder="password"
-                                [formControlName]="'senha'" required>
+                            <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha" placeholder="senha">
                             <mat-icon type="button" mat-icon-button matSuffix class="icon" (click)="hide = !hide">{{hide ? 'visibility_off' :
                                 'visibility'}}</mat-icon>
                         </mat-form-field>
-
+        
                         <mat-error>
-                            <app-errors [formcontrolname]="'password'" [formGroup]="form"></app-errors>
+                            <app-errors [formcontrolname]="'senha'" [formGroup]="form"></app-errors>
                         </mat-error>
 
-
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Telefone</mat-label>
+                            <input matInput placeholder="Digite aqui" type="text" [mask]="'0000-0000'" formControlName="telefone" name="telefone">
+                        </mat-form-field>
+        
+                        <mat-error>
+                            <app-errors [formcontrolname]="'telefone'" [formGroup]="form"></app-errors>
+                        </mat-error>
+        
+                        <mat-form-field fxFlex appearance="outline">
+                            <mat-label>Data Nascimento</mat-label>
+                            <input matInput formControlName="dt_nasc" name="data nascimento" [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+        
+                        <mat-error>
+                            <app-errors [formcontrolname]="'dt_nasc'" [formGroup]="form"></app-errors>
+                        </mat-error>
                     </div>
-                    <div>
-                        <p style="color: #8DAB7B; margin-bottom: 10px;" fxLayoutAlign="end end" class="example-margin">Esqueceu a senha?</p>
-                    </div>
-
-                    <button mat-raised-button [disabled]="form.invalid" class="btn" (click)="navigate()">
+                </div>
+                <div style="max-width: 50%;" fxLayout="row" fxLayoutGap="10px">
+                    <button mat-icon-button class="btn-save" fxLayout="row" fxLayoutGap="10" [disabled]="form.invalid" (click)="onSave()">
                         Entrar
                     </button>
-                </form>
-            </div>
+                    
+                    <button mat-icon-button class="btn-cancel" fxLayout="row" fxLayoutGap="10" (click)="cancel()">
+                        Voltar
+                    </button>
+                </div>
+            </form>
         </div>
     </mat-card>
-</div> -->
-
-ola
+</div>
