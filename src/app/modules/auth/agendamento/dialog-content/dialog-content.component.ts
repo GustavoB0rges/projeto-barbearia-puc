@@ -39,6 +39,7 @@ export class DialogContentComponent implements OnInit {
   createForm(): void {
     this.form = this._formBuilder.group({
       nome: [null],
+      tipo: [null],
     });
   }
 

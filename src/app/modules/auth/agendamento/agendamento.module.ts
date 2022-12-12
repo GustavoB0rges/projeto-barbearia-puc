@@ -10,6 +10,18 @@ import { NgxMaskModule } from 'ngx-mask';
 import { MaterialModule } from 'src/shared/material/material.module';
 import { SharedModule } from 'src/shared/shared.module';
 import { DialogContentComponent } from './dialog-content/dialog-content.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  listPlugin,
+  interactionPlugin
+])
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'index' },
@@ -24,6 +36,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MaterialModule,
+    FullCalendarModule,
     SharedModule,
     HttpClientModule,
     ReactiveFormsModule,

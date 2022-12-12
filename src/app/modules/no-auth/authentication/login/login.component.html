@@ -42,7 +42,9 @@
 
                     </div>
                     <div>
-                        <p style="color: #8DAB7B; margin-bottom: 10px;" fxLayoutAlign="end end" class="example-margin">Esqueceu a senha?</p>
+                        <button fxFlex class="btn-register example-margin" fxLayoutAlign="end end" fx routerLink="/forgotPassword">
+                            Esqueceu a senha?
+                        </button>
                     </div>
 
                     <button mat-raised-button [disabled]="form.invalid" class="btn" (click)="navigate()">

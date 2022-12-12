@@ -3,13 +3,13 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss']
 })
 
 
-export class LoginComponent implements OnInit {
+export class ForgotPasswordComponent implements OnInit {
   form: FormGroup;
   hide = true;
 
@@ -22,15 +22,8 @@ export class LoginComponent implements OnInit {
         Validators.email,
         Validators.pattern('^[a-z0-9.%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')
       ]),
-
-      senha: new FormControl(null, [
-        Validators.required,
-        Validators.minLength(4),
-      ])
     })
   }
-
-
 
   ngOnInit(): void {
 
@@ -38,6 +31,10 @@ export class LoginComponent implements OnInit {
 
   navigate() {
     this.router.navigate(['/auth/agendamentos'])
+  }
+
+  cancel() {
+    this.router.navigate(['**'])
   }
 
 

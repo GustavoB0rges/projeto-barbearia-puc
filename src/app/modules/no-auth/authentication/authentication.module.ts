@@ -9,18 +9,21 @@ import { LoginComponent } from './login/login.component';
 import { SharedModule } from 'src/shared/shared.module';
 import { RegisterComponent } from './register/register.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'login' },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+  { path: 'forgotPassword', component: ForgotPasswordComponent },
 ];
 
 @NgModule({
   declarations: [
     LoginComponent,
     RegisterComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     HttpClientModule,

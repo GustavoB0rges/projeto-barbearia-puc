@@ -27,6 +27,20 @@
                 <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
             </mat-error>
         </div>
+        <div fxLayout="row wrap" fxLayoutGap="15">
+            <!-- <mat-form-field appearance="fill">
+                <mat-label>Favorite food</mat-label>
+                <mat-select>
+                  <mat-option *ngFor="let food of foods" [value]="food.value">
+                    {{food.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field> -->
+
+            <mat-error>
+                <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
+            </mat-error>
+        </div>
     </div>
 
     
