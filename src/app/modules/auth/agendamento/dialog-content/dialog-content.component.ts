@@ -91,7 +91,7 @@ export class DialogContentComponent implements OnInit {
 
   onSelectChangeFuncionario(event): void {
     const selectedRow = event.value;
-    this.form?.get('funcionario').setValue(selectedRow.pessoa.nome);
+    this.form?.get('funcionario').setValue(selectedRow?.pessoa.nome);
   }
 
   onSelectChangeServico(event): void {
@@ -138,8 +138,8 @@ export class DialogContentComponent implements OnInit {
       this.servico.map(element =>  element.id)
       const payload = {
         nome_cliente: this.form.get('nome').value,
-        // servico: this.servico.map(element => element.id),
-        // funcionario: this.funcionario.map(element => element.id),
+        servico: this.servico.map(element => element.id),
+        funcionario: this.funcionario.map(element => element.id),
         dt_fim: end,
         status: 'Agendado',
         valor: null,
