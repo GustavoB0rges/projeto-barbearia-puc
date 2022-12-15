@@ -2,9 +2,9 @@ import { ClienteService } from '../cliente.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cliente-form',
   templateUrl: './cliente-form.component.html',
@@ -21,7 +21,8 @@ export class ClienteFormComponent implements OnInit {
 
   constructor(private clienteService: ClienteService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,) {
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
 
     this.form = new FormGroup({
       id: new FormControl(null),
@@ -130,16 +131,12 @@ export class ClienteFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Cliente cadastrado', 'success');
+            this.toastr.success('Sucesso!', 'Cliente cadastrado!');
             this.router.navigate(['/auth/clientes/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
-          );
+          this.toastr.error(error.error.error);
         }
       }
     );
@@ -181,16 +178,12 @@ export class ClienteFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Cliente atualizado!', 'success');
+            this.toastr.success('Sucesso', 'Cliente atualizado!')
             this.router.navigate(['/auth/clientes/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
-          );
+          this.toastr.error(error.error.error)
         }
       }
     )

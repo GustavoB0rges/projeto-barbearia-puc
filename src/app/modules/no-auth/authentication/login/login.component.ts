@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subject, takeUntil } from 'rxjs';
-import Swal from 'sweetalert2';
 import { AuthenticationService } from '../authentication.service';
 
 @Component({
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   hide = true;
 
   constructor(private router: Router,
-    private _authenticationService: AuthenticationService,) {
+    private _authenticationService: AuthenticationService,
+    private toastr: ToastrService) {
     localStorage.removeItem('token');
 
     this.form = new FormGroup({
@@ -45,17 +46,16 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', data.token);
             this.navigate();
           } else {
-              Swal.fire(
+              this.toastr.error(
                 "E-mail inexistente!!",
                 "error"
               );
           }
         },
         error: (error) => {
-          Swal.fire(
+          this.toastr.error(
             "Erro!!",
             error.error.error,
-            "error"
           );
         }
       }

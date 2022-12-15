@@ -4,13 +4,13 @@
             <div fxFlex fxLayoutAlign="start center" >
                 <h1>{{ title }}</h1>
             </div>
-            <button mat-icon-button (click)="editar()" [disabled]="form.invalid" class="btn-save">
+            <button mat-icon-button (click)="editar()" *ngIf="operation === 'view'" class="btn-save">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="salvar()" [disabled]="form.invalid" class="btn-save">
+            <button mat-icon-button (click)="salvar()" *ngIf="operation === 'new' || operation === 'edit'" class="btn-save">
                 <mat-icon>event_available</mat-icon>
             </button>
-            <button mat-icon-button (click)="cancelarAgendamento()" class="btn-delete" >
+            <button mat-icon-button (click)="cancelarAgendamento()" *ngIf="operation === 'edit' || operation === 'view'" class="btn-delete" >
                 <mat-icon>event_busy</mat-icon>
             </button>
             <button mat-icon-button (click)="cancelar()" class="btn-cancel">
@@ -35,9 +35,9 @@
         <div fxLayout="row wrap" fxLayoutGap="15">
             <mat-form-field fxFlex appearance="fill">
                 <mat-label>Tipo de Serviços</mat-label>
-                <mat-select (selectionChange)="onSelectChangeServico($event)">
+                <mat-select formControlName="in_id_servico" (selectionChange)="onSelectChangeServico($event)" multiple>
                   <mat-option *ngFor="let item of servico" [value]="item">
-                    {{ item['descricao'] }}
+                    {{ item['descricao'] + ' - R$' + item['valor'] }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
@@ -50,7 +50,7 @@
         <div fxLayout="row wrap" fxLayoutGap="15">
             <mat-form-field  fxFlex appearance="fill">
                 <mat-label>Funcionários</mat-label>
-                <mat-select (selectionChange)="onSelectChangeFuncionario($event)">
+                <mat-select formControlName="in_id_funcionario" (selectionChange)="onSelectChangeFuncionario($event)">
                   <mat-option *ngFor="let item of funcionario" [value]="item">
                     {{ item['pessoa']['nome'] }}
                   </mat-option>
@@ -66,7 +66,7 @@
     <div fxLayout="row" fxLayoutGap="10">
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Data Início</mat-label>
-            <input matInput formControlName="dt_ini" name="data inicio" [matDatepicker]="picker">
+            <input matInput formControlName="dt_ini" name="data inicio" [min]="minDate" [matDatepicker]="picker">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -76,7 +76,7 @@
         </mat-error>
     
         <mat-form-field fxFlex appearance="outline">
-            <input matInput formControlName="dt_ini_hr" type="time" name="data inicio" [matDatepicker]="picker">
+            <input matInput formControlName="dt_ini_hr" type="time" name="data inicio">
         </mat-form-field>
         
         <mat-error>
@@ -87,9 +87,9 @@
     <div fxLayout="row" fxLayoutGap="10">
         <mat-form-field fxFlex appearance="outline">
             <mat-label>Data Fim</mat-label>
-            <input matInput formControlName="dt_fim" name="data fim" [matDatepicker]="picker">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <input matInput formControlName="dt_fim" name="data fim" [matDatepicker]="picker2">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
         <mat-error>
@@ -97,7 +97,7 @@
         </mat-error>
     
         <mat-form-field fxFlex appearance="outline">
-            <input matInput formControlName="dt_fim_hr" type="time" required="false" autocomplete="off" name="data fim" [matDatepicker]="picker">
+            <input matInput formControlName="dt_fim_hr" type="time" required="false" autocomplete="off" name="data fim">
         </mat-form-field>
         
         <mat-error>

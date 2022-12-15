@@ -2,9 +2,9 @@ import { ServicoService } from '../servicos.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-servicos-form',
   templateUrl: './servicos-form.component.html',
@@ -21,7 +21,8 @@ export class ServicoFormComponent implements OnInit {
 
   constructor(private servicoService: ServicoService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,) {
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
 
     this.form = new FormGroup({
       id: new FormControl(null),
@@ -75,15 +76,13 @@ export class ServicoFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Servico cadastrado', 'success');
+            this.toastr.success('Sucesso!', 'Servico cadastrado!');
             this.router.navigate(['/auth/servicos/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
+          this.toastr.error(
+            error.error.error
           );
         }
       }
@@ -106,15 +105,13 @@ export class ServicoFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Servico atualizado!', 'success');
+            this.toastr.success('Sucesso!', 'Servico atualizado!');
             this.router.navigate(['/auth/servicos/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
+          this.toastr.error(
+            error.error.error
           );
         }
       }

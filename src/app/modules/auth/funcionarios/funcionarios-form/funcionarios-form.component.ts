@@ -2,9 +2,9 @@ import { FuncionarioService } from '../funcionarios.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-funcionarios-form',
   templateUrl: './funcionarios-form.component.html',
@@ -21,7 +21,8 @@ export class FuncionarioFormComponent implements OnInit {
 
   constructor(private funcionarioService: FuncionarioService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,) {
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
 
     this.form = new FormGroup({
       id: new FormControl(null),
@@ -130,15 +131,13 @@ export class FuncionarioFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Funcionário cadastrado', 'success');
+            this.toastr.success('Sucesso!', 'Funcionário cadastrado!');
             this.router.navigate(['/auth/funcionarios/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
+          this.toastr.error(
+            error.error.error
           );
         }
       }
@@ -181,15 +180,13 @@ export class FuncionarioFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Funcionário atualizado!', 'success');
+            this.toastr.success('Sucesso!', 'Funcionário atualizado!');
             this.router.navigate(['/auth/funcionarios/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
+          this.toastr.error(
+            error.error.error
           );
         }
       }

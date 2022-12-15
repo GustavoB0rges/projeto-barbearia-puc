@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { ClienteService } from 'src/app/modules/auth/clientes/cliente.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -17,7 +17,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private clienteService: ClienteService
+    private clienteService: ClienteService,
+    private toastr: ToastrService
   ) 
     {
     this.form = new FormGroup({
@@ -56,15 +57,13 @@ export class RegisterComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Cadastrado realizado com sucesso!', 'success');
+            this.toastr.success('Sucesso!', 'Cadastrado realizado com sucesso!');
             this.router.navigate(['**']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
+          this.toastr.error(
+            error.error.error
           );
         }
       }

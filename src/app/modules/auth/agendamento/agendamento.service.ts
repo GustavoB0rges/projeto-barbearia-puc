@@ -19,6 +19,30 @@ export class AgendamentoService {
     this.messageSource.next(message)
   }
 
+  create(agendamento:any): Observable<any>{
+    return this.http.post<any>(`${ this.baseUrl }/agendamentos`, agendamento);
+  }
+
+  read(): Observable<any>{
+    return this.http.get<any>(`${ this.baseUrl }/agendamentos`)
+  }
+
+  readByid(id: number): Observable<any>{
+    const url = `${this.baseUrl}/agendamentos/${id}`
+    return this.http.get<any>(url)
+
+  }
+
+  update(agendamento:any, id): Observable<any> {
+    const url = `${this.baseUrl}/agendamentos/${id}`
+    return this.http.put<any>(url , agendamento)
+  }
+
+  delete(id: number): Observable<any>{
+    const url = `${this.baseUrl}/agendamentos/${id}`
+    return this.http.delete<any>(url)
+  }
+
   readServicos(): Observable<any>{
     return this.http.get<any>(`${ this.baseUrl }/servicos`)
   }

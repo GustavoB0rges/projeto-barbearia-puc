@@ -2,8 +2,6 @@
 import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
-import Swal from 'sweetalert2';
-
 import { AuthService } from './auth.service';
 
 @Injectable({ providedIn: 'root' })

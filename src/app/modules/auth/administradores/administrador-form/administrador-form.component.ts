@@ -2,9 +2,9 @@ import { AdministradorService } from '../administrador.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import Swal from 'sweetalert2';
 import { Subject, takeUntil } from 'rxjs';
 import * as moment from 'moment';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-administrador-form',
   templateUrl: './administrador-form.component.html',
@@ -21,7 +21,8 @@ export class AdministradorFormComponent implements OnInit {
 
   constructor(private administradorService: AdministradorService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,) {
+    private activatedRoute: ActivatedRoute,
+    private toastr: ToastrService) {
 
     this.form = new FormGroup({
       id: new FormControl(null),
@@ -130,16 +131,12 @@ export class AdministradorFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Administrador cadastrado', 'success');
+            this.toastr.success('Sucesso', 'Administrador cadastrado!');
             this.router.navigate(['/auth/administradores/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
-          );
+          this.toastr.error(error.error.error);
         }
       }
     );
@@ -181,16 +178,12 @@ export class AdministradorFormComponent implements OnInit {
       {
         next: (data) => {
           if (data) {
-            Swal.fire('Sucesso!', 'Administrador atualizado!', 'success');
+            this.toastr.success('Sucesso', 'Administrador atualizado')
             this.router.navigate(['/auth/administradores/index']);
           }
         },
         error: (error) => {
-          Swal.fire(
-            "Erro!!",
-            error.error.error,
-            "error"
-          );
+          this.toastr.error(error.error.error);
         }
       }
     )

@@ -34,6 +34,7 @@ export class AgendamentoComponent implements OnInit, OnChanges {
   formValues = null;
   operation: 'view' | 'new' | 'edit' = 'new';
   dataSourceFuncionarios: [] = [];
+  dataSourceAgendamento: any[] = [];
 
   events: CalendarEvent[] = [];
 
@@ -76,15 +77,7 @@ export class AgendamentoComponent implements OnInit, OnChanges {
       }
     });
     this.getFuncionario();
-    this.onRefresh();
-
-    const start = moment
-    .utc(new Date())
-    .format('YYYY-MM-DD[T]HH:mm:ss');
-  const end = moment
-    .utc(new Date())
-    .format('YYYY-MM-DD[T]HH:mm:ss');
-    
+    this.onRefresh();    
     this.events = [...this.events];
   }
 
@@ -97,31 +90,30 @@ export class AgendamentoComponent implements OnInit, OnChanges {
   }
 
   onRefresh(): void {
-    this.calendarOptions = {
-      plugins: [dayGridPlugin],
-      initialView: 'dayGridMonth',
-      weekends: false,
-      dateClick: this.onEventClick.bind(this),
-      eventClick: function(info) {
-        console.log(info.event.id);
-      },
-      events: [
-        {
-          calendarId: '1a470c8e-40ed-4c2d-b590-a4f1f6ead6cc',
-          id: '132',
-          title: 'teste',
-          description: 'teste',
-          duration: null,
-          start: '2022-12-15T02:24:43',
-          end: '2022-12-15T06:24:43',
-          allDay: false,
-          isFirstInstance: false,
-          recurringEventId: null,
-          recurrence: null,
-          backgroundColor: 'green',
-        }
-      ]
-    };
+     this.agendamentoService.read().subscribe(agendamento => {
+      console.log(agendamento);
+      
+      this.dataSourceAgendamento = agendamento;
+
+      this.dataSourceAgendamento = this.dataSourceAgendamento.map(element => element = {
+        id: element.id,
+        title: element.histServicos,
+        description: 'teste',
+        duration: null,
+        start: element.dt_ini,
+        end: element.dt_fim,
+        backgroundColor: 'green',
+      })
+      
+      this.calendarOptions = {
+        plugins: [dayGridPlugin],
+        initialView: 'dayGridMonth',
+        weekends: false,
+        dateClick: this.onEventClick.bind(this),
+        eventClick: this.onEventClick.bind(this),
+        events: this.dataSourceAgendamento
+      };
+    });
   }
 
   async getFuncionario(): Promise<void> {
@@ -136,10 +128,14 @@ export class AgendamentoComponent implements OnInit, OnChanges {
     this.calendarOptions.headerToolbar['right'] = value;
   }
 
-  openDialog(selectInfo?: DateSelectArg): void {
-    // const value = this.calendarOptions.select();
-    // console.log(value);
-    this.handleDateSelect(selectInfo)
+  openDialog(selectInfo?: DateSelectArg, data?, operation?): void {
+    if (data) {
+      operation = 'view'
+    } else {
+      operation = 'new';
+    }
+    console.log(operation);
+    this.handleDateSelect(selectInfo, data, operation)
   }
 
   handleCalendarToggle() {
@@ -151,51 +147,27 @@ export class AgendamentoComponent implements OnInit, OnChanges {
     calendarOptions.weekends = !calendarOptions.weekends;
   }
 
-  handleDateSelect(selectInfo: DateSelectArg, data?) {
-
-    console.log(selectInfo);
-    
-
-    if (this.operation !== 'view') {
-      this._dialog.open(DialogContentComponent, {
-        maxHeight: '80vh',
-        maxWidth: '95vh',
-        height: AUTO_STYLE,
-        width: window.innerWidth < 900 ? '95%' : '50%',
-        disableClose: true,
-        data: { data },
-      }).afterClosed().subscribe((result) => {
-        if (!result) {
-          return;
-        }
-        const calendarApi = selectInfo.view.calendar;
-        console.log(calendarApi);
-        console.log('selectInfo',selectInfo);
-        
-        calendarApi.unselect(); // clear date selection
-
-        calendarApi.addEvent({
-          id: createEventId(),
-          title: `<strong>${result.nome} - 13h00 - 14h00</strong>`,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay
-        });
-
-        console.log({
-          id: createEventId(),
-          title: `<strong>${result.nome} - 13h00 - 14h00</strong>`,
-          start: selectInfo.startStr,
-          end: selectInfo.endStr,
-          allDay: selectInfo.allDay
-        });
-        
-      });
-    }
+  handleDateSelect(selectInfo: DateSelectArg, data?, operation?) {
+    this._dialog.open(DialogContentComponent, {
+      maxHeight: '80vh',
+      maxWidth: '95vh',
+      height: AUTO_STYLE,
+      width: window.innerWidth < 900 ? '95%' : '50%',
+      disableClose: true,
+      data: { data, operation: operation },
+    }).afterClosed().subscribe((result) => {
+      this.onRefresh();
+    });
   }
 
-  onEventClick(calendarEvent) {
-    console.log(calendarEvent);
+  onEventClick(value) {
+    console.log(value.event.id);
+
+    this.agendamentoService.readByid(value.event.id).subscribe(response => {
+      console.log(response);
+      this.openDialog(null, response, 'view')
+      
+    })
     
   }
 
