@@ -2,17 +2,17 @@
 
     <mat-sidenav #sidenav mode="side" class="sidenav" mode="side" opened fixedInViewport="true">
 
-        <mat-nav-list  class="nav-list">
+        <mat-nav-list class="nav-list">
             <div class="logo py-4">
                 <img src="./assets/img/logo.png" style="width: 100%" alt="Company Logo" />
             </div>
 
-            <div class="profile">
+            <div fxLayout="column" class="profile">
                 
-                <h4 class="name">John Smith</h4>
-                <p class="designation">Software Engineer</p>
+                <h4 style="margin-top: 20px;" class="name">{{ getName }}</h4>
+                <p class="designation">{{ getEmail }}</p>
 
-                <img class="avatar mat-elevation-z8" src="./assets/img/perfil.jpg" />
+                <img fxFlex class="avatar mat-elevation-z8" src="./assets/img/perfil.jpg" />
             </div>
             <mat-divider style="margin-bottom: 15px;"></mat-divider>
 

@@ -27,7 +27,7 @@ export class ServicoFormComponent implements OnInit {
     this.form = new FormGroup({
       id: new FormControl(null),
       descricao: new FormControl(null, [Validators.required, Validators.maxLength(120)]),
-      valor: new FormControl(null),
+      valor: new FormControl(null, Validators.required),
     });
   }
 

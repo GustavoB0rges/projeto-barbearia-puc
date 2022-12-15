@@ -19,8 +19,8 @@ export class DialogContentComponent implements OnInit {
   
   form: FormGroup;
   data: any = {};
-  funcionario: [] = [];
-  servico: [] = [];
+  funcionario: any[] = [];
+  servico: any[] = [];
   title: string = 'Visualizando';
   minDate = new Date();
 
@@ -96,21 +96,22 @@ export class DialogContentComponent implements OnInit {
 
   onSelectChangeServico(event): void {
     const selectedRow = event.value;
-    this.form?.get('tipo').setValue(selectedRow.descricao);
+    this.servico = selectedRow;
+    console.log(selectedRow);
+    console.log(this.servico);
   }
 
   createForm(): void {
     this.form = new FormGroup({
-      nome: new FormControl(null),
-      funcionario: new FormControl(null),
+      nome: new FormControl(null, Validators.required),
+      funcionario: new FormControl(null, Validators.required),
       status: new FormControl({ value: null, disabled: true }),
-      dt_ini: new FormControl(null),
-      dt_ini_hr: new FormControl(null),
-      dt_fim: new FormControl({ value: null, disabled: true }),
-      dt_fim_hr: new FormControl(null),
-      in_id_servico: new FormControl(null),
-      in_id_funcionario: new FormControl(null),
-      in_id_cliente: new FormControl(null),
+      dt_ini: new FormControl(null, Validators.required),
+      dt_ini_hr: new FormControl(null, Validators.required),
+      dt_fim: new FormControl({ value: null, disabled: true }, Validators.required),
+      dt_fim_hr: new FormControl(null, Validators.required),
+      in_id_servico: new FormControl(null, Validators.required),
+      in_id_funcionario: new FormControl(null, Validators.required),
     });
   }
 
@@ -129,14 +130,21 @@ export class DialogContentComponent implements OnInit {
     .utc(this.form.get('dt_fim').value + ' ' + this.form.get('dt_fim_hr').value)
     .format('YYYY-MM-DD[T]HH:mm:ss');
 
+    console.log(this.servico);
+    console.log(this.funcionario);
+    
+
     if (this.operation === 'new') {
+      this.servico.map(element =>  element.id)
       const payload = {
         nome_cliente: this.form.get('nome').value,
-        dt_ini: start,
+        // servico: this.servico.map(element => element.id),
+        // funcionario: this.funcionario.map(element => element.id),
         dt_fim: end,
         status: 'Agendado',
-        valor: '200',
-        histServicos: this.form.get('nome').value
+        valor: null,
+        histServicos: null,
+
       }
       this.agendamentoService.create(payload).subscribe(
         {

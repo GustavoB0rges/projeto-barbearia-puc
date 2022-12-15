@@ -10,12 +10,15 @@ import { ActivatedRoute } from '@angular/router';
 export class SidenavComponent implements OnInit {
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
+  getName: string;
+  getEmail: string;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-   
-   }
+  this.getName = localStorage.getItem('nome');
+  this.getEmail = localStorage.getItem('email');
+  }
 
   onChangeToggleMenu(): void {
     this.sidenav.toggle();

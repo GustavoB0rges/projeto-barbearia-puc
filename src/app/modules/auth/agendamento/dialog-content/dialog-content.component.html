@@ -7,7 +7,7 @@
             <button mat-icon-button (click)="editar()" *ngIf="operation === 'view'" class="btn-save">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button (click)="salvar()" *ngIf="operation === 'new' || operation === 'edit'" class="btn-save">
+            <button mat-icon-button (click)="salvar()" [disabled]="form.invalid" *ngIf="operation === 'new' || operation === 'edit'" class="btn-save">
                 <mat-icon>event_available</mat-icon>
             </button>
             <button mat-icon-button (click)="cancelarAgendamento()" *ngIf="operation === 'edit' || operation === 'view'" class="btn-delete" >
@@ -35,7 +35,7 @@
         <div fxLayout="row wrap" fxLayoutGap="15">
             <mat-form-field fxFlex appearance="fill">
                 <mat-label>Tipo de Serviços</mat-label>
-                <mat-select formControlName="in_id_servico" (selectionChange)="onSelectChangeServico($event)" multiple>
+                <mat-select formControlName="in_id_servico" multiple>
                   <mat-option *ngFor="let item of servico" [value]="item">
                     {{ item['descricao'] + ' - R$' + item['valor'] }}
                   </mat-option>

@@ -24,7 +24,14 @@ export class AuthenticationService {
   }
 
   login(email: string, senha: string): Observable<any> {
-    return this.http.post<any>(`${ this.API_BASE_URL }/login`, { email, senha }).pipe(map((result: any) => result));
+    return this.http.post<any>(`${ this.API_BASE_URL }/login`, { email, senha }).pipe(map((result: any) => {
+      const nome = result.data.nome
+      const email = result.data.email
+      localStorage.setItem('nome', nome)
+      localStorage.setItem('email', email)
+      return result
+    }));
+    
   }
 
   logout(): void {
