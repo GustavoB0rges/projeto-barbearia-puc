@@ -91,14 +91,12 @@ export class AgendamentoComponent implements OnInit, OnChanges {
 
   onRefresh(): void {
      this.agendamentoService.read().subscribe(agendamento => {
-      console.log(agendamento);
-      
       this.dataSourceAgendamento = agendamento;
 
       this.dataSourceAgendamento = this.dataSourceAgendamento.map(element => element = {
         id: element.id,
-        title: element.histServicos,
-        description: 'teste',
+        title: element.nome_cliente,
+        description: 'Agendamento',
         duration: null,
         start: element.dt_ini,
         end: element.dt_fim,
@@ -109,7 +107,16 @@ export class AgendamentoComponent implements OnInit, OnChanges {
         plugins: [dayGridPlugin],
         initialView: 'dayGridMonth',
         weekends: false,
-        dateClick: this.onEventClick.bind(this),
+        headerToolbar: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
+        },
+        editable: true,
+        selectable: true,
+        selectMirror: true,
+        dayMaxEvents: true,
+        locale: 'pt-br',
         eventClick: this.onEventClick.bind(this),
         events: this.dataSourceAgendamento
       };

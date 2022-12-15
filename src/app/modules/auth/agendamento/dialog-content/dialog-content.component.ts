@@ -51,6 +51,7 @@ export class DialogContentComponent implements OnInit {
     if (this.operation === 'new') {
       this.form.enable();
       this.form.get('dt_fim').disable();
+      this.form.get('status').disable();
     }
 
     this.form.get('dt_ini').valueChanges.subscribe(element => {
@@ -70,8 +71,14 @@ export class DialogContentComponent implements OnInit {
     const id = this.data?.id;
     if (id) {
       this.agendamentoService.readByid(id).subscribe(response => {
-        // const horasAjustadas = moment(response.pessoa.dataNasc).add(1,'days').format('YYYY-MM-DD')
-        this.form.get('nome').setValue(this.data.histServicos)
+        console.log(response);
+        
+        this.form.get('nome').setValue(response.nome_cliente)
+        this.form.get('dt_ini').setValue(moment(response.dt_ini).format('YYYY-MM-DD'))
+        this.form.get('dt_ini_hr').setValue(moment(response.dt_ini).format('HH:mm:ss'))
+        this.form.get('dt_fim').setValue(moment(response.dt_fim).format('YYYY-MM-DD'))
+        this.form.get('dt_fim_hr').setValue(moment(response.dt_fim).format('HH:mm:ss'))
+        this.form.get('status').setValue(response.status)
       });
     }
   }
@@ -108,29 +115,17 @@ export class DialogContentComponent implements OnInit {
   }
 
   salvar(): void { 
-    // this.form.get('nome').setValue(this.form.get('nome').value)
-    // this.form.get('dt_ini').setValue(this.form.get('dt_ini').value)
-    // this.form.get('dt_ini_hr').setValue(this.form.get('dt_ini').value)
-    // this.form.get('dt_fim').setValue(this.form.get('dt_fim').value)
-    // this.form.get('dt_fim_hr').setValue(this.form.get('dt_fim').value)
-    // this.form.get('status').setValue(this.form.get('status').value)
-
     this.form.get('dt_ini').setValue(moment(this.form.get('dt_ini').value).format('YYYY-MM-DD'))
     this.form.get('dt_ini_hr').setValue(this.form.get('dt_ini_hr').value)
     this.form.get('dt_fim').setValue(moment(this.form.get('dt_ini').value).format('YYYY-MM-DD'))
     this.form.get('dt_fim_hr').setValue(this.form.get('dt_fim_hr').value)
     
-    console.log(this.form.get('dt_ini').value);
-    console.log(this.form.get('dt_ini_hr').value);
-    console.log(this.form.get('dt_fim').value);
-    console.log(this.form.get('dt_fim_hr').value);
-    
-
 
     const start = moment
     .utc(this.form.get('dt_ini').value + ' ' + this.form.get('dt_ini_hr').value)
     .format('YYYY-MM-DD[T]HH:mm:ss');
-  const end = moment
+
+    const end = moment
     .utc(this.form.get('dt_fim').value + ' ' + this.form.get('dt_fim_hr').value)
     .format('YYYY-MM-DD[T]HH:mm:ss');
 
@@ -159,8 +154,10 @@ export class DialogContentComponent implements OnInit {
     } else {
       const id = this.data.id;
       const payload = {
-        dt_ini: '2022-12-14T06:24:43',
-        dt_fim: '2022-12-15T06:25:43',
+        in_id: id,
+        nome_cliente: this.form.get('nome').value,
+        dt_ini: start,
+        dt_fim: end,
         status: 'Agendado',
         valor: '200',
         histServicos: this.form.get('nome').value
@@ -180,7 +177,6 @@ export class DialogContentComponent implements OnInit {
         }
       )
     }
-    // this._dialog.close(this.form.getRawValue());
   }
   editar(): void { 
     this.title = 'Editando';
@@ -191,6 +187,7 @@ export class DialogContentComponent implements OnInit {
     
     this.form.enable();
     this.form.get('dt_fim').disable();
+    this.form.get('status').disable();
   }
 
   cancelarAgendamento(): void { 
