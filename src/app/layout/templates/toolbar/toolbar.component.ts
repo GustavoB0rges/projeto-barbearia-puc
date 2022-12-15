@@ -33,6 +33,11 @@ export class ToolBarComponent implements OnInit {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login'])
+  }
+
   toggleMenu(): void {
     this.changeToggleMenu.emit();
   }

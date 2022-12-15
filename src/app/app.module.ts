@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { LayoutModule } from './layout/layout.module';
 import { MatStepperModule } from '@angular/material/stepper';
+import { AuthenticationModule } from './modules/no-auth/authentication/authentication.module';
+import { ToastrModule } from 'ngx-toastr';
 registerLocaleData(localePt)
 
 @NgModule({
@@ -28,8 +30,9 @@ registerLocaleData(localePt)
     FormsModule,
     FlexLayoutModule,
     LayoutModule,
-    MatStepperModule
-    
+    MatStepperModule,
+    AuthenticationModule,
+    ToastrModule.forRoot({ timeOut: 10000, positionClass: 'toast-top-right', preventDuplicates: true }),
   ],
   providers: [{
     provide: LOCALE_ID,

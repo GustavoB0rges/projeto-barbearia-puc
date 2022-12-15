@@ -20,3 +20,26 @@
 .icon {
     cursor: pointer;
 }
+
+.date-picker-toggle {
+    z-index: 0;
+    margin-top: 3px;
+}
+
+.icon {
+    margin-top: 10px !important;
+    cursor: pointer;
+}
+
+input[type="time" i]::-webkit-calendar-picker-indicator {
+    opacity: 1;
+    display: block;
+    width: 20px;
+    height: 20px;
+    border-width: thin;
+    cursor: pointer;
+}
+
+.mat-input-element[type=date], .mat-input-element[type=datetime], .mat-input-element[type=datetime-local], .mat-input-element[type=month], .mat-input-element[type=week], .mat-input-element[type=time] {
+    height: 17px;
+}

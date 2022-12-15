@@ -11,7 +11,7 @@ export class SidenavComponent implements OnInit {
 
   @ViewChild('sidenav', { static: false }) sidenav: MatSidenav;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
    

@@ -23,157 +23,22 @@
             <div style="margin-top: 50px;">
                 <div fxLayout="row wrap" fxLayoutGap="15">
                     <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Nome</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="nome" [disabled]="true"
-                            name="nome">
+                        <mat-label>Descrição</mat-label>
+                        <input matInput placeholder="Digite aqui" type="text" formControlName="descricao" [disabled]="true"
+                            name="descricao">
                     </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>CPF</mat-label>
-                        <input matInput placeholder="Digite aqui" [mask]="'CPF_CNPJ'" type="text" formControlName="cpf" name="cpf">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'cpf'"  [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Data Nascimento</mat-label>
-                        <input matInput formControlName="dt_nasc" name="data nascimento" [matDatepicker]="picker">
-                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <mat-datepicker #picker></mat-datepicker>
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'dt_nasc'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-    
-                </div>
-    
-                <div fxLayout="row wrap" fxLayoutGap="15">
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Email</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="email" [disabled]="true"
-                            name="email">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'email'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Telefone</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" [mask]="'0000-0000'" formControlName="telefone" name="telefone">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'telefone'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Celular</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" [mask]="'(00) 00000-0000'" formControlName="celular" name="celular">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'celular'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-    
-                </div>
-    
-                <div fxLayout="row wrap" fxLayoutGap="15">
-                    <mat-form-field fxFlex="20" appearance="outline">
-                        <mat-label>Cep</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="cep" [disabled]="true"
-                            name="cep">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'cep'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex="20" appearance="outline">
-                        <mat-label>Estado</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="estado" name="estado">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'estado'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex="20" appearance="outline">
-                        <mat-label>Cidade</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="cidade" name="cidade">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'cidade'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Bairro</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="bairro" name="bairro">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'bairro'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-    
-                </div>
-    
-                <div fxLayout="row wrap" fxLayoutGap="15">
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Rua</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="rua" [disabled]="true"
-                            name="rua">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'rua'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex="10" appearance="outline">
-                        <mat-label>Número</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="numero" name="numero">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'numero'" [formGroup]="form"></app-errors>
-                    </mat-error>
-    
-                    <mat-form-field fxFlex appearance="outline">
-                        <mat-label>Complemento</mat-label>
-                        <input matInput placeholder="Digite aqui" type="text" formControlName="complemento"
-                            name="complemento">
-                    </mat-form-field>
-    
-                    <mat-error>
-                        <app-errors [formcontrolname]="'complemento'" [formGroup]="form"></app-errors>
-                    </mat-error>
 
-                    <mat-form-field appearance="outline">
-                        <mat-label>Senha</mat-label>
-                        <input matInput [type]="hide ? 'password' : 'text'" formControlName="senha" placeholder="senha">
-                        <mat-icon type="button" mat-icon-button matSuffix class="icon" (click)="hide = !hide">{{hide ? 'visibility_off' :
-                            'visibility'}}</mat-icon>
+                    <mat-form-field fxFlex="30" appearance="outline">
+                        <mat-label>Valor do Serviço</mat-label>
+                        <input matInput placeholder="Digite aqui" prefix="R$ " mask="separator.2" thousandSeparator="." type="text" formControlName="valor" name="valor">
                     </mat-form-field>
     
                     <mat-error>
-                        <app-errors [formcontrolname]="'senha'" [formGroup]="form"></app-errors>
+                        <app-errors [formcontrolname]="'valor'" [formGroup]="form"></app-errors>
                     </mat-error>
     
                 </div>
             </div>
-
-            
-
         </form>
     </div>
 </div>

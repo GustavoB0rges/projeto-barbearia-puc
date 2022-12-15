@@ -1,24 +1,28 @@
 <form fxFlex="100" [formGroup]="form" fxLayout="column">
     <div style="margin: 10px;" fxLayout="row" fxLayoutAlign="end end" fxLayoutGap="10">
-        <button mat-icon-button (click)="salvar()" [disabled]="form.invalid" class="btn-save">
-            <mat-icon>save</mat-icon>
-        </button>
-        <!-- <button mat-icon-button (click)="editar()" [disabled]="form.invalid" class="btn-save" *ngIf="showEdit && operation === 'view' ">
-            <mat-icon>edit</mat-icon>
-        </button>
-        <button mat-icon-button (click)="deletar()" class="btn-delete" *ngIf="operation === 'edit' || operation === 'view'">
-            <mat-icon>delete</mat-icon>
-        </button>
-        <button mat-icon-button (click)="cancelar()" class="btn-cancel">
-            <mat-icon>cancel</mat-icon>
-        </button> -->
-
+        <div fxFlex>
+            <div fxFlex fxLayoutAlign="start center" >
+                <h1>{{ title }}</h1>
+            </div>
+            <button mat-icon-button (click)="editar()" [disabled]="form.invalid" class="btn-save">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button (click)="salvar()" [disabled]="form.invalid" class="btn-save">
+                <mat-icon>event_available</mat-icon>
+            </button>
+            <button mat-icon-button (click)="cancelarAgendamento()" class="btn-delete" >
+                <mat-icon>event_busy</mat-icon>
+            </button>
+            <button mat-icon-button (click)="cancelar()" class="btn-cancel">
+                <mat-icon>cancel</mat-icon>
+            </button>
+        </div>
     </div>
 
     <div style="margin-top: 50px;">
         <div fxLayout="row wrap" fxLayoutGap="15">
             <mat-form-field fxFlex appearance="outline">
-                <mat-label>Nome</mat-label>
+                <mat-label>Nome do Cliente</mat-label>
                 <input matInput placeholder="Digite aqui" type="text" formControlName="nome" [disabled]="true"
                     name="nome">
             </mat-form-field>
@@ -27,15 +31,31 @@
                 <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
             </mat-error>
         </div>
+        
         <div fxLayout="row wrap" fxLayoutGap="15">
-            <!-- <mat-form-field appearance="fill">
-                <mat-label>Favorite food</mat-label>
-                <mat-select>
-                  <mat-option *ngFor="let food of foods" [value]="food.value">
-                    {{food.viewValue}}
+            <mat-form-field fxFlex appearance="fill">
+                <mat-label>Tipo de Serviços</mat-label>
+                <mat-select (selectionChange)="onSelectChangeServico($event)">
+                  <mat-option *ngFor="let item of servico" [value]="item">
+                    {{ item['descricao'] }}
                   </mat-option>
                 </mat-select>
-              </mat-form-field> -->
+              </mat-form-field>
+
+            <mat-error>
+                <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
+            </mat-error>
+        </div>
+
+        <div fxLayout="row wrap" fxLayoutGap="15">
+            <mat-form-field  fxFlex appearance="fill">
+                <mat-label>Funcionários</mat-label>
+                <mat-select (selectionChange)="onSelectChangeFuncionario($event)">
+                  <mat-option *ngFor="let item of funcionario" [value]="item">
+                    {{ item['pessoa']['nome'] }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
 
             <mat-error>
                 <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
@@ -43,6 +63,59 @@
         </div>
     </div>
 
+    <div fxLayout="row" fxLayoutGap="10">
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Data Início</mat-label>
+            <input matInput formControlName="dt_ini" name="data inicio" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-error>
+            <app-errors [formcontrolname]="'dt_ini'" [formGroup]="form"></app-errors>
+        </mat-error>
     
+        <mat-form-field fxFlex appearance="outline">
+            <input matInput formControlName="dt_ini_hr" type="time" name="data inicio" [matDatepicker]="picker">
+        </mat-form-field>
+        
+        <mat-error>
+            <app-errors [formcontrolname]="'dt_ini_hr'" [formGroup]="form"></app-errors>
+        </mat-error>
+    </div>
+    
+    <div fxLayout="row" fxLayoutGap="10">
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Data Fim</mat-label>
+            <input matInput formControlName="dt_fim" name="data fim" [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-error>
+            <app-errors [formcontrolname]="'dt_fim'" [formGroup]="form"></app-errors>
+        </mat-error>
+    
+        <mat-form-field fxFlex appearance="outline">
+            <input matInput formControlName="dt_fim_hr" type="time" required="false" autocomplete="off" name="data fim" [matDatepicker]="picker">
+        </mat-form-field>
+        
+        <mat-error>
+            <app-errors [formcontrolname]="'dt_fim_hr'" [formGroup]="form"></app-errors>
+        </mat-error>
+    </div>
+
+    <div fxLayout="row wrap" fxLayoutGap="15">
+        <mat-form-field fxFlex appearance="outline">
+            <mat-label>Status</mat-label>
+            <input matInput type="text" formControlName="status" [disabled]="true"
+                name="status">
+        </mat-form-field>
+
+        <mat-error>
+            <app-errors [formcontrolname]="'status'" [formGroup]="form"></app-errors>
+        </mat-error>
+    </div>
+
 
 </form>

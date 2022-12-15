@@ -20,7 +20,7 @@ export class FuncionarioIndexComponent implements OnInit {
   operation: string;
   servico = new MatTableDataSource<any>();
   // dataSource = new MatTableDataSource<Servico>(null);
-  displayedColumns = ['id', 'nome', 'email', 'telefone', 'dataNasc', 'actions'];
+  displayedColumns = ['id', 'descricao','valor','actions'];
   name: string;
   searchText: string;
   inputOpen = false;

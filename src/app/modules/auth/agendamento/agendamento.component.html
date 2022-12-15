@@ -15,6 +15,8 @@
         <full-calendar
           *ngIf='calendarVisible'
           [options]='calendarOptions'
+          (eventClick)="onEventClick($event)"
+          (eventSet)="onEventClick($event)"
         ></full-calendar>
       </div>
   </div>

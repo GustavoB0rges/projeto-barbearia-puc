@@ -29,28 +29,16 @@
                                 <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{row.id}}</td>
                             </ng-container>
                     
-                            <!-- Name Column -->
-                            <ng-container matColumnDef="nome">
-                                <th mat-header-cell *matHeaderCellDef>Nome</th>
-                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{row.pessoa.nome}}</td>
-                            </ng-container>
-                    
-                            <!-- email Column -->
-                            <ng-container matColumnDef="email">
-                                <th mat-header-cell *matHeaderCellDef>email</th>
-                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{ row.pessoa.email  }}</td>
+                            <!-- Descrição Column -->
+                            <ng-container matColumnDef="descricao">
+                                <th mat-header-cell *matHeaderCellDef>Descrição</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{row.descricao}}</td>
                             </ng-container>
 
-                            <!-- telefone Column -->
-                            <ng-container matColumnDef="telefone">
-                                <th mat-header-cell *matHeaderCellDef>Telefone</th>
-                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{ row.pessoa.telefone  }}</td>
-                            </ng-container>
-
-                            <!-- data nascimento Column -->
-                            <ng-container matColumnDef="dataNasc">
-                                <th mat-header-cell *matHeaderCellDef>Data nascimento</th>
-                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{ row.pessoa.dataNasc | date: 'dd/MM/yyy'  }}</td>
+                            <!-- Valor Column -->
+                            <ng-container matColumnDef="valor">
+                                <th mat-header-cell *matHeaderCellDef>Valor do Serviço</th>
+                                <td mat-cell style="cursor: pointer;" *matCellDef="let row" (click)="onClickRow(row)">{{row.valor | currency : 'R$'}}</td>
                             </ng-container>
                     
                             <!-- actions Column -->
