@@ -48,7 +48,6 @@ export class AgendamentoComponent implements OnInit, OnChanges {
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
     },
     initialView: 'dayGridMonth',
-    weekends: true,
     editable: true,
     selectable: true,
     selectMirror: true,
@@ -106,7 +105,6 @@ export class AgendamentoComponent implements OnInit, OnChanges {
       this.calendarOptions = {
         plugins: [dayGridPlugin],
         initialView: 'dayGridMonth',
-        weekends: false,
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',

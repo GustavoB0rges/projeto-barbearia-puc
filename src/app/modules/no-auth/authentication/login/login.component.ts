@@ -39,8 +39,6 @@ export class LoginComponent implements OnInit {
     this._authenticationService.login(this.form.value.email, this.form.value.senha).subscribe(
       {
         next: (data) => {
-          console.log(data);
-          
           if (data) {
             localStorage.setItem('user', JSON.stringify({ ...data.data.pessoa, ...{ email: data.data.email } }));
             localStorage.setItem('token', data.token);

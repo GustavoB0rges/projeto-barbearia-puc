@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class ClienteService {
 
-  baseUrl = "https://api-projeto-barbearia-production-a8b0.up.railway.app"
+  baseUrl = "https://api-projeto-barbearia-production-b4d1.up.railway.app"
 
   constructor(private snackBar: MatSnackBar ,private http: HttpClient) { }
 
