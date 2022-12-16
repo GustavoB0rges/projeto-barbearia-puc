@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
   }
 
   navigate() {
-    this.router.navigate(['/auth/agendamentos'])
+    this.router.navigate(['**'])
   }
 
   cancel() {
