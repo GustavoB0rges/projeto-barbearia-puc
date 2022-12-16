@@ -141,7 +141,6 @@ export class AgendamentoComponent implements OnInit, OnChanges {
     } else {
       operation = 'new';
     }
-    console.log(operation);
     this.handleDateSelect(selectInfo, data, operation)
   }
 
@@ -168,12 +167,8 @@ export class AgendamentoComponent implements OnInit, OnChanges {
   }
 
   onEventClick(value) {
-    console.log(value.event.id);
-
     this.agendamentoService.readByid(value.event.id).subscribe(response => {
-      console.log(response);
       this.openDialog(null, response, 'view')
-      
     })
     
   }

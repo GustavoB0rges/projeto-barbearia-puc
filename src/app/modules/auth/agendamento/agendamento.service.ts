@@ -8,7 +8,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 })
 export class AgendamentoService {
 
-  baseUrl = "http://localhost:3000"
+  baseUrl = "https://api-projeto-barbearia-production-a8b0.up.railway.app"
 
   private messageSource = new BehaviorSubject<string>("aa");
   changeVar = this.messageSource.asObservable();
