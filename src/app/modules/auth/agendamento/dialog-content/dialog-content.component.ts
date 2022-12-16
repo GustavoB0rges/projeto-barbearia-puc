@@ -69,14 +69,14 @@ export class DialogContentComponent implements OnInit {
     const id = this.data?.id;
     if (id) {
       this.agendamentoService.readByid(id).subscribe(response => {
-        this.form.get('nome').setValue(response.nome_cliente)
+        this.form.get('nome').setValue(response.nome_cliente);
         this.form.get('dt_ini').setValue(moment(response.dt_ini).format('YYYY-MM-DD'));
         this.form.get('dt_ini_hr').setValue(moment(response.dt_ini).format('HH:mm:ss'));
         this.form.get('dt_fim').setValue(moment(response.dt_fim).format('YYYY-MM-DD'));
         this.form.get('dt_fim_hr').setValue(moment(response.dt_fim).format('HH:mm:ss'));
-        this.form.get('status').setValue(response.status)
-        this.form.get('funcionario').setValue(response.funcionario.id)
-        this.form.get('servico').setValue(response.servico.id)
+        this.form.get('status').setValue(response.status);
+        this.form.get('funcionario').setValue(response.funcionario.id);
+        this.form.get('servico').setValue(response.servico.id);
         this.servico = [{ id: response.servico.id, descricao: response.servico.descricao, valor: response.servico.valor }];
         this.funcionario = [{ id: response.funcionario.id, pessoa: { nome: response.funcionario.pessoa.nome} }];
         this.getFuncionario();
