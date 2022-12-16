@@ -74,13 +74,34 @@ export class DialogContentComponent implements OnInit {
         console.log(response);
         
         this.form.get('nome').setValue(response.nome_cliente)
-        this.form.get('dt_ini').setValue(moment(response.dt_ini).format('YYYY-MM-DD'))
-        this.form.get('dt_ini_hr').setValue(moment(response.dt_ini).format('HH:mm:ss'))
-        this.form.get('dt_fim').setValue(moment(response.dt_fim).format('YYYY-MM-DD'))
-        this.form.get('dt_fim_hr').setValue(moment(response.dt_fim).format('HH:mm:ss'))
-        this.form.get('status').setValue(response.status)
+        this.form.get('dt_ini').setValue(moment(response.dt_ini).format('YYYY-MM-DD'));
+        this.form.get('dt_ini_hr').setValue(moment(response.dt_ini).format('HH:mm:ss'));
+        this.form.get('dt_fim').setValue(moment(response.dt_fim).format('YYYY-MM-DD'));
+        this.form.get('dt_fim_hr').setValue(moment(response.dt_fim).format('HH:mm:ss'));
+        this.form.get('status').setValue(response.status);
+        this.form.get('funcionario').setValue(response.funcionario.id);
+        this.form.get('servico').setValue(response.servico.id);
+        this.servico = [{ id: response.servico.id, descricao: response.servico.descricao, valor: response.servico.valor }];
+        this.funcionario = [{ id: response.funcionario.id, pessoa: { nome: response.funcionario.pessoa.nome} }];
+        this.getFuncionario();
+        this.getServicos();
       });
     }
+  }
+
+  createForm(): void {
+    this.form = new FormGroup({
+      nome: new FormControl(null, Validators.required),
+      funcionario: new FormControl(null, Validators.required),
+      servico: new FormControl(null, Validators.required),
+      status: new FormControl({ value: null, disabled: true }),
+      dt_ini: new FormControl(null, Validators.required),
+      dt_ini_hr: new FormControl(null, Validators.required),
+      dt_fim: new FormControl({ value: null, disabled: true }, Validators.required),
+      dt_fim_hr: new FormControl(null, Validators.required),
+      in_id_servico: new FormControl(null),
+      in_id_funcionario: new FormControl(null),
+    });
   }
 
   async getServicos(): Promise<void> {
@@ -91,34 +112,21 @@ export class DialogContentComponent implements OnInit {
 
   onSelectChangeFuncionario(event): void {
     const selectedRow = event.value;
-    this.form?.get('funcionario').setValue(selectedRow?.pessoa.nome);
+    this.form?.get('in_id_funcionario').setValue(selectedRow?.id);
+    console.log(this.form?.get('in_id_funcionario').value);
+    
   }
 
   onSelectChangeServico(event): void {
     const selectedRow = event.value;
-    this.servico = selectedRow;
-    console.log(selectedRow);
-    console.log(this.servico);
-  }
-
-  createForm(): void {
-    this.form = new FormGroup({
-      nome: new FormControl(null, Validators.required),
-      funcionario: new FormControl(null, Validators.required),
-      status: new FormControl({ value: null, disabled: true }),
-      dt_ini: new FormControl(null, Validators.required),
-      dt_ini_hr: new FormControl(null, Validators.required),
-      dt_fim: new FormControl({ value: null, disabled: true }, Validators.required),
-      dt_fim_hr: new FormControl(null, Validators.required),
-      in_id_servico: new FormControl(null, Validators.required),
-      in_id_funcionario: new FormControl(null, Validators.required),
-    });
+    this.form?.get('in_id_servico').setValue(selectedRow?.id);
+    console.log(this.form?.get('in_id_servico').value);
   }
 
   salvar(): void { 
-    this.form.get('dt_ini').setValue(moment(this.form.get('dt_ini').value).format('YYYY-MM-DD'))
+    this.form.get('dt_ini').setValue(moment(this.form.get('dt_ini').value).format('YYYY-MM-DD'));
     this.form.get('dt_ini_hr').setValue(this.form.get('dt_ini_hr').value)
-    this.form.get('dt_fim').setValue(moment(this.form.get('dt_ini').value).format('YYYY-MM-DD'))
+    this.form.get('dt_fim').setValue(moment(this.form.get('dt_ini').value).format('YYYY-MM-DD'));
     this.form.get('dt_fim_hr').setValue(this.form.get('dt_fim_hr').value)
     
 
@@ -135,16 +143,19 @@ export class DialogContentComponent implements OnInit {
     
 
     if (this.operation === 'new') {
-      this.servico.map(element =>  element.id)
       const payload = {
         nome_cliente: this.form.get('nome').value,
-        servico: this.servico.map(element => element.id),
-        funcionario: this.funcionario.map(element => element.id),
+        servico: {
+          id: this.form?.get('in_id_servico').value
+        },
+        funcionario: {
+          id: this.form?.get('in_id_funcionario').value
+        },
+        dt_ini: start,
         dt_fim: end,
         status: 'Agendado',
         valor: null,
         histServicos: null,
-
       }
       this.agendamentoService.create(payload).subscribe(
         {
@@ -164,11 +175,17 @@ export class DialogContentComponent implements OnInit {
       const payload = {
         in_id: id,
         nome_cliente: this.form.get('nome').value,
+        servico: {
+          id: this.form?.get('in_id_servico').value
+        },
+        funcionario: {
+          id: this.form?.get('in_id_funcionario').value
+        },
         dt_ini: start,
         dt_fim: end,
         status: 'Agendado',
-        valor: '200',
-        histServicos: this.form.get('nome').value
+        valor: null,
+        histServicos: null,
       }
       
       this.agendamentoService.update(payload, id).subscribe(

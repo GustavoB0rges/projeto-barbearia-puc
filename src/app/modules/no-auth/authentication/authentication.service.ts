@@ -10,7 +10,7 @@ import { Pessoa } from '../../../models/pessoa';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  API_BASE_URL: string = "https://api-projeto-barbearia-production-a8b0.up.railway.app";
+  API_BASE_URL: string = "http://localhost:3000";
 
   private currentPessoaSubject: BehaviorSubject<Pessoa>;
   public currentPessoa: Observable<Pessoa>;

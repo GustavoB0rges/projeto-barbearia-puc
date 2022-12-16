@@ -35,31 +35,23 @@
         <div fxLayout="row wrap" fxLayoutGap="15">
             <mat-form-field fxFlex appearance="fill">
                 <mat-label>Tipo de Serviços</mat-label>
-                <mat-select formControlName="in_id_servico" multiple>
-                  <mat-option *ngFor="let item of servico" [value]="item">
+                <mat-select formControlName="servico" (selectionChange)="onSelectChangeServico($event)">
+                  <mat-option *ngFor="let item of servico" [value]="item.id">
                     {{ item['descricao'] + ' - R$' + item['valor'] }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-
-            <mat-error>
-                <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
-            </mat-error>
         </div>
 
         <div fxLayout="row wrap" fxLayoutGap="15">
             <mat-form-field  fxFlex appearance="fill">
                 <mat-label>Funcionários</mat-label>
-                <mat-select formControlName="in_id_funcionario" (selectionChange)="onSelectChangeFuncionario($event)">
-                  <mat-option *ngFor="let item of funcionario" [value]="item">
+                <mat-select formControlName="funcionario" (selectionChange)="onSelectChangeFuncionario($event)">
+                  <mat-option *ngFor="let item of funcionario" [value]="item.id">
                     {{ item['pessoa']['nome'] }}
                   </mat-option>
                 </mat-select>
               </mat-form-field>
-
-            <mat-error>
-                <app-errors [formcontrolname]="'nome'" [formGroup]="form"></app-errors>
-            </mat-error>
         </div>
     </div>
 
